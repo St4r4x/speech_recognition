@@ -38,8 +38,4 @@ python speech_recognition.py chemin/vers/audio.[wav|mp3|ogg|etc]
 
 Le script supporte différents formats audio en entrée (WAV, MP3, OGG, etc.) et les convertira automatiquement en WAV si nécessaire.
 
-Options :
-
-- `--gpu` : Utilise le GPU si disponible
-
 Le résultat sera sauvegardé dans un fichier RTTM avec le même nom que le fichier audio.

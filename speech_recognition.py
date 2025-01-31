@@ -50,7 +50,6 @@ def process_audio(audio_path):
             "pyannote/speaker-diarization-3.1",
             use_auth_token=token
         )
-        print(torch.cuda.is_available())
 
         # Use GPU if requested and available
         if torch.cuda.is_available():
