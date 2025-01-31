@@ -169,7 +169,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-
+results/
 # audio files
 audio/
 *.wav

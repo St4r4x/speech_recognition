@@ -33,8 +33,19 @@ brew install ffmpeg
 ## Utilisation
 
 ```bash
-python speech_recognition.py chemin/vers/audio.[wav|mp3|ogg|etc]
+python main.py chemin/vers/audio.[wav|mp3|ogg|etc] [--output dossier/resultats] [--diarization]
 ```
+
+Options :
+
+- `--output`, `-o` : Spécifie le dossier de sortie pour les résultats (défaut: "results")
+- `--diarization`, `-d` : Active la diarisation des locuteurs (identification des intervenants)
+
+Le script génère trois fichiers de sortie :
+
+1. `xxx.txt` : Transcription brute
+2. `xxx_dialogue.txt` : Transcription formatée en dialogue avec identification des locuteurs
+3. `xxx.json` : Données complètes avec timestamps et informations des locuteurs
 
 Le script supporte différents formats audio en entrée (WAV, MP3, OGG, etc.) et les convertira automatiquement en WAV si nécessaire.
 
