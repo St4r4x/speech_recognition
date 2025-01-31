@@ -1,6 +1,6 @@
-# Speech Recognition with Pyannote.audio
+# Speech Recognition with Whisper
 
-Ce projet utilise pyannote.audio pour effectuer de la diarisation de locuteurs sur des fichiers audio.
+Ce projet utilise Whisper (OpenAI) pour effectuer de la transcription automatique de fichiers audio avec horodatage.
 
 ## Installation
 
@@ -23,30 +23,42 @@ brew install ffmpeg
 # Télécharger et installer depuis https://ffmpeg.org/download.html
 ```
 
-3. Configurer le token HuggingFace :
-   - Créez un fichier `.env` à la racine du projet
-   - Ajoutez votre token HuggingFace sous la forme :
-   ```
-   HUGGING_FACE_TOKEN=votre_token_ici
-   ```
-
 ## Utilisation
 
 ```bash
-python main.py chemin/vers/audio.[wav|mp3|ogg|etc] [--output dossier/resultats] [--diarization]
+python main.py chemin/vers/audio.[wav|mp3|ogg|etc] [--output dossier/resultats]
 ```
 
 Options :
 
 - `--output`, `-o` : Spécifie le dossier de sortie pour les résultats (défaut: "results")
-- `--diarization`, `-d` : Active la diarisation des locuteurs (identification des intervenants)
+
+### Format des sorties
 
 Le script génère trois fichiers de sortie :
 
-1. `xxx.txt` : Transcription brute
-2. `xxx_dialogue.txt` : Transcription formatée en dialogue avec identification des locuteurs
-3. `xxx.json` : Données complètes avec timestamps et informations des locuteurs
+1. `xxx.txt` : Transcription brute du texte
+2. `xxx_dialogue.txt` : Transcription formatée avec horodatage [MM:SS]
+3. `xxx.json` : Données complètes incluant :
+   - Texte complet
+   - Timestamps pour chaque segment
+   - Informations détaillées sur la transcription
 
-Le script supporte différents formats audio en entrée (WAV, MP3, OGG, etc.) et les convertira automatiquement en WAV si nécessaire.
+### Formats supportés
 
-Le résultat sera sauvegardé dans un fichier RTTM avec le même nom que le fichier audio.
+Le script accepte de nombreux formats audio en entrée (WAV, MP3, OGG, etc.) et les convertit automatiquement en WAV si nécessaire.
+
+### Exemple de sortie dialogue
+
+```
+=== Transcription avec timestamps ===
+
+[00:00 - 00:15] Début de la transcription...
+[00:15 - 00:30] Suite de la conversation...
+```
+
+## Notes
+
+- Le modèle utilisé est "whisper-large-v3-turbo" d'OpenAI
+- La transcription s'effectue sur GPU si disponible, sinon sur CPU
+- Les fichiers temporaires WAV sont automatiquement gérés
